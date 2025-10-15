@@ -109,11 +109,71 @@ export DB_PASSWORD=contraseña
 
 ---
 
+## 🧪 Ejecución y pruebas locales
 
-Si aparece un error de conexión, revisa:
+Para verificar que el proyecto compila correctamente y que las dependencias están bien configuradas:
 
-* El puerto y nombre de tu base de datos.
-* Que el servidor MySQL esté corriendo.
-* Que el timezone sea correcto: `America/Lima`.
+```bash
+mvn clean verify
+```
+
+Esto ejecutará:
+
+* **Compilación del código**
+* **Validación de tests**
+* **Chequeo de configuración Maven**
+
+Si todo está correcto, verás:
+
+```
+BUILD SUCCESS
+```
 
 ---
+
+## 🤖 Integración continua (CI)
+
+El proyecto incluye un **workflow de GitHub Actions** que valida automáticamente la compilación y ejecución de tests cuando se abre un Pull Request o se hace push en `main` o `develop`.
+
+📄 Archivo: `.github/workflows/ci.yml`
+
+Ejemplo del pipeline:
+
+```yaml
+name: CI - Build & Test
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Compilar y ejecutar tests
+        run: mvn clean verify
+```
+
+💡 Esto garantiza que las builds sean estables antes de fusionar cualquier cambio.
+
+---
+
+## 🐛 Solución de problemas comunes
+
+| Problema                                    | Posible causa                             | Solución                                                         |
+| ------------------------------------------- | ----------------------------------------- | ---------------------------------------------------------------- |
+| `Access denied for user 'root'@'localhost'` | Contraseña incorrecta o MySQL no iniciado | Verifica tus credenciales y que el servicio MySQL esté activo.   |
+| `Unknown database 'pollo_empoderado_db'`    | Base de datos no creada                   | Crea la base de datos con `CREATE DATABASE pollo_empoderado_db;` |
+| `Timezone issue`                            | Configuración de zona horaria incorrecta  | Usa `serverTimezone=America/Lima` en tu URL JDBC.                |
