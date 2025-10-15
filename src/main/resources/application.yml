@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: local  # perfil por defecto
+
+  jpa:
+    hibernate:
+      ddl-auto: update  # crea o actualiza las tablas automáticamente (puedes cambiar a validate más adelante)
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
