@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("dataSeeder")
 @AllArgsConstructor
 public class DataSeeder implements CommandLineRunner {
 

@@ -11,13 +11,17 @@ import java.util.Set;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Profile;
+import org.springframework.transaction.annotation.Transactional;
 
 @Configuration
 @Profile({ "local" }) // Solo en entornos locales
+@DependsOn("dataSeeder") // Asegura que DataSeeder se ejecute primero
 public class AdminUserInitializer {
 
     @Bean
+    @Transactional
     public CommandLineRunner createAdminUser(UserRepository userRepository, RoleRepository roleRepository) {
         return args -> {
             String adminEmail = "admin@empoderado.com";
