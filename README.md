@@ -177,3 +177,18 @@ jobs:
 | `Access denied for user 'root'@'localhost'` | Contraseña incorrecta o MySQL no iniciado | Verifica tus credenciales y que el servicio MySQL esté activo.   |
 | `Unknown database 'pollo_empoderado_db'`    | Base de datos no creada                   | Crea la base de datos con `CREATE DATABASE pollo_empoderado_db;` |
 | `Timezone issue`                            | Configuración de zona horaria incorrecta  | Usa `serverTimezone=America/Lima` en tu URL JDBC.                |
+
+---
+## 👤 Usuario admin de prueba
+
+Al iniciar la aplicación en entorno local, se crea automáticamente el usuario admin para pruebas:
+
+- **Email:** `admin@empoderado.com`
+- **Contraseña:** `ContraseñaSegura123!`
+- **Rol:** `ROLE_ADMIN`
+
+> ⚠️ **Importante:**  
+> Este usuario y contraseña son solo para desarrollo y pruebas.  
+> **No uses estas credenciales en producción** y elimina el inicializador antes de desplegar.
+
+---
