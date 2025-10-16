@@ -111,23 +111,53 @@ export DB_PASSWORD=contraseña
 
 ## 🧪 Ejecución y pruebas locales
 
-Para verificar que el proyecto compila correctamente y que las dependencias están bien configuradas:
+### Pasos para ejecutar el proyecto
 
-```bash
-mvn clean verify
-```
+1. **Crear la base de datos** (solo la primera vez):
+   ```sql
+   CREATE DATABASE pollo_empoderado_db;
+   ```
 
-Esto ejecutará:
+2. **Crear el archivo de configuración local** `src/main/resources/application-local.yml`:
+   ```yaml
+   spring:
+     datasource:
+       password: tu_password_mysql
+   ```
 
-* **Compilación del código**
-* **Validación de tests**
-* **Chequeo de configuración Maven**
+3. **Verificar compilación y tests**:
+   ```bash
+   # Con Maven Wrapper (recomendado)
+   mvnw.cmd clean verify    # Windows
+   ./mvnw clean verify      # Linux/Mac
+   ```
 
-Si todo está correcto, verás:
+4. **Ejecutar la aplicación**:
+   ```bash
+   mvnw.cmd spring-boot:run    # Windows
+   ./mvnw spring-boot:run      # Linux/Mac
+   ```
 
-```
-BUILD SUCCESS
-```
+5. **Verificar que funciona**:
+   - Abrir: http://localhost:8080/api/index
+   - Deberías ver: `{"message": "API de Pollería El Empoderado funcionando correctamente", "status": "OK"}`
+
+### Usuario administrador por defecto
+
+El sistema crea automáticamente un usuario administrador:
+- **Email**: `admin@empoderado.com`
+- **Contraseña**: `admin123`
+- **Rol**: `ROLE_ADMIN`
+
+> ⚠️ **Importante**: Cambiar estas credenciales en producción.
+
+### Variables de entorno necesarias
+
+| Variable | Descripción | Ejemplo |
+|----------|-------------|----------|
+| `DB_PASSWORD` | Contraseña MySQL (solo para dev/prod) | `mi_password` |
+| `DB_USERNAME` | Usuario MySQL (opcional, default: root) | `root` |
+| `DB_URL` | URL completa de BD (solo para prod) | `jdbc:mysql://...` |
 
 ---
 
@@ -170,10 +200,58 @@ jobs:
 
 ---
 
+## 📜 Estructura del proyecto
+
+```
+src/main/java/com/elpolloempoderado/backend/
+├── config/          # Configuraciones de Spring
+├── controller/      # Controladores REST
+├── dto/             # Data Transfer Objects
+├── model/           # Entidades JPA
+├── repository/      # Repositorios de datos
+├── security/        # Configuración de seguridad
+├── service/         # Lógica de negocio
+├── util/            # Utilidades
+└── BackendApplication.java
+
+src/main/resources/
+├── sql/             # Scripts de base de datos
+├── application.yml  # Configuración base
+├── application-dev.yml
+├── application-prod.yml
+└── application-local.yml  # (crear manualmente)
+```
+
+---
+
+## 🗄️ Configuración de Base de Datos
+
+### Inicialización de la base de datos
+
+Antes de ejecutar la aplicación por primera vez, ejecuta el script de inicialización:
+
+```bash
+# Conectarse a MySQL
+mysql -u root -p
+
+# Ejecutar el script de inicialización
+source src/main/resources/sql/init-database.sql
+```
+
+O manualmente:
+
+```sql
+CREATE DATABASE IF NOT EXISTS pollo_empoderado_db 
+CHARACTER SET utf8mb4 
+COLLATE utf8mb4_unicode_ci;
+```
+
+---
+
 ## 🐛 Solución de problemas comunes
 
 | Problema                                    | Posible causa                             | Solución                                                         |
 | ------------------------------------------- | ----------------------------------------- | ---------------------------------------------------------------- |
 | `Access denied for user 'root'@'localhost'` | Contraseña incorrecta o MySQL no iniciado | Verifica tus credenciales y que el servicio MySQL esté activo.   |
-| `Unknown database 'pollo_empoderado_db'`    | Base de datos no creada                   | Crea la base de datos con `CREATE DATABASE pollo_empoderado_db;` |
+| `Unknown database 'pollo_empoderado_db'`    | Base de datos no creada                   | Ejecuta el script `src/main/resources/sql/init-database.sql`     |
 | `Timezone issue`                            | Configuración de zona horaria incorrecta  | Usa `serverTimezone=America/Lima` en tu URL JDBC.                |
