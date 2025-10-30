@@ -4,17 +4,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
-import java.time.LocalDate;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterRequestDTO {
-    private String firstName;
-    private String lastName;
+public class LoginRequestDTO {
     private String email;
     private String password;
-    private String dni;
-    private LocalDate birthDate;
-    private String address;
 }

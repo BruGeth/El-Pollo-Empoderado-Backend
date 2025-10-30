@@ -1,11 +1,16 @@
 package com.elpolloempoderado.backend.dto;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
-import lombok.Data;
-
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDTO {
     private Long id;
     private String firstName;
@@ -15,5 +20,5 @@ public class UserDTO {
     private LocalDate birthDate;
     private String address;
     private Set<String> roles;
-    private String createdAt;
+    private LocalDateTime createdAt;
 }

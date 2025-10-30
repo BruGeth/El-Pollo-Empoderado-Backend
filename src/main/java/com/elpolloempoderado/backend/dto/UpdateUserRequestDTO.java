@@ -9,11 +9,9 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterRequestDTO {
+public class UpdateUserRequestDTO {
     private String firstName;
     private String lastName;
-    private String email;
-    private String password;
     private String dni;
     private LocalDate birthDate;
     private String address;
