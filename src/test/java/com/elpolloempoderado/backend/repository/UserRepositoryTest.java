@@ -1,55 +1,69 @@
 package com.elpolloempoderado.backend.repository;
 
+import com.elpolloempoderado.backend.model.Role;
 import com.elpolloempoderado.backend.model.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.test.context.ActiveProfiles;
+
+import java.time.LocalDate;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Pruebas de integración para UserRepository.
- * Verifica persistencia y reglas de negocio básicas.
- */
 @DataJpaTest
-public class UserRepositoryTest {
+@ActiveProfiles("test")
+class UserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private RoleRepository roleRepository;
 
-    /**
-     * Verifica que se puede crear y recuperar un usuario por email.
-     */
     @Test
-    void testCreateAndFindUser() {
+    void shouldFindUserByEmail() {
+        // Given
+        Role userRole = roleRepository.save(new Role(null, "ROLE_USER"));
+        
         User user = new User();
-        user.setEmail("test@example.com");
-        user.setPassword("hashedpassword"); // Simula contraseña ya hasheada
         user.setFirstName("Test");
         user.setLastName("User");
+        user.setEmail("test@example.com");
+        user.setPassword("hashedPassword");
+        user.setDni("12345678");
+        user.setBirthDate(LocalDate.of(1990, 1, 1));
+        user.setAddress("Test Address");
+        user.setRoles(Set.of(userRole));
+        
         userRepository.save(user);
-
-        // Verifica que el usuario se puede recuperar por email
-        assertThat(userRepository.findByEmail("test@example.com")).isPresent();
+        
+        // When
+        var foundUser = userRepository.findByEmail("test@example.com");
+        
+        // Then
+        assertThat(foundUser).isPresent();
+        assertThat(foundUser.get().getFirstName()).isEqualTo("Test");
+        assertThat(foundUser.get().getRoles()).hasSize(1);
     }
 
-    /**
-     * Verifica que la contraseña se guarda hasheada y no en texto plano.
-     */
     @Test
-    void testPasswordIsHashed() {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    void shouldCheckIfEmailExists() {
+        // Given
+        Role userRole = roleRepository.save(new Role(null, "ROLE_USER"));
+        
         User user = new User();
-        user.setEmail("hash@example.com");
-        // Hashea la contraseña antes de guardar
-        user.setPassword(encoder.encode("plainpassword"));
+        user.setFirstName("Test");
+        user.setLastName("User");
+        user.setEmail("existing@example.com");
+        user.setPassword("hashedPassword");
+        user.setRoles(Set.of(userRole));
+        
         userRepository.save(user);
-
-        User savedUser = userRepository.findByEmail("hash@example.com").get();
-        // Verifica que la contraseña guardada no contiene el texto plano
-        assertThat(savedUser.getPassword()).doesNotContain("plainpassword");
-        // Verifica que el hash corresponde a la contraseña original
-        assertThat(encoder.matches("plainpassword", savedUser.getPassword())).isTrue();
+        
+        // When & Then
+        assertThat(userRepository.existsByEmail("existing@example.com")).isTrue();
+        assertThat(userRepository.existsByEmail("nonexistent@example.com")).isFalse();
     }
 }

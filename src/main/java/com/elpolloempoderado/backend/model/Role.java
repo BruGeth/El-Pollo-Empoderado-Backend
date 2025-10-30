@@ -1,7 +1,9 @@
 package com.elpolloempoderado.backend.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Entity
 @Table(name = "roles")
@@ -9,15 +11,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Role {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false, unique = true)
+    
+    @Column(nullable = false, unique = true, length = 50)
     private String name;
-
-    public Role(String name) {
-        this.name = name;
-    }
 }

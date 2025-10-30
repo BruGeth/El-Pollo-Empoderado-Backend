@@ -4,8 +4,7 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
-
-spring:
   jpa:
     hibernate:
       ddl-auto: validate  # Solo valida el esquema, no modifica tablas en producción
+    show-sql: false

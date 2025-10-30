@@ -1,35 +1,45 @@
 package com.elpolloempoderado.backend.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
-@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    @Column(nullable = false, length = 100)
     private String firstName;
+    
+    @Column(nullable = false, length = 100)
     private String lastName;
-
-    @Column(nullable = false, unique = true)
+    
+    @Column(nullable = false, unique = true, length = 150)
     private String email;
-
+    
     @Column(nullable = false)
-    private String password; // Debe guardarse hasheada
-
+    private String password;
+    
+    @Column(length = 8)
     private String dni;
+    
     private LocalDate birthDate;
+    
+    @Column(length = 255)
     private String address;
-
+    
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "user_roles",
@@ -37,7 +47,12 @@ public class User {
         inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles;
-
-    private LocalDateTime createdAt = LocalDateTime.now();
-
+    
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+    
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 }
