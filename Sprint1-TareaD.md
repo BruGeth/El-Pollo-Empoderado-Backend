@@ -20,7 +20,7 @@ Implementar endpoints REST para registro y autenticación de usuarios con valida
 **Descripción**: Endpoint de registro de nuevos usuarios
 
 #### Funcionalidades implementadas:
-- ✅ Recibe `RegisterRequestDTO` con validaciones
+- ✅ Recibe `RegisterRequest` con validaciones
 - ✅ Verifica email único en base de datos
 - ✅ Hash seguro de contraseña con BCrypt
 - ✅ Asignación automática de rol `ROLE_USER`
@@ -75,7 +75,7 @@ Content-Type: application/json
 **Descripción**: Endpoint de autenticación con JWT
 
 #### Funcionalidades implementadas:
-- ✅ Recibe `LoginRequestDTO` (email, password)
+- ✅ Recibe `LoginRequest` (email, password)
 - ✅ Autenticación con `AuthenticationManager`
 - ✅ Generación de token JWT
 - ✅ Respuesta con `AuthResponse` completa
@@ -142,8 +142,8 @@ Content-Type: application/json
 ## 🔧 Componentes Técnicos Implementados
 
 ### DTOs creados:
-- `RegisterRequestDTO` - Datos de registro
-- `LoginRequestDTO` - Credenciales de login  
+- `RegisterRequest` - Datos de registro
+- `LoginRequest` - Credenciales de login  
 - `AuthResponse` - Respuesta de autenticación
 - `UserDTO` - Datos de usuario (sin password)
 - `ErrorResponse` - Respuesta de errores

@@ -1,7 +1,7 @@
 package com.elpolloempoderado.backend.controller;
 
-import com.elpolloempoderado.backend.dto.ChangePasswordRequestDTO;
-import com.elpolloempoderado.backend.dto.UpdateUserRequestDTO;
+import com.elpolloempoderado.backend.dto.ChangePasswordRequest;
+import com.elpolloempoderado.backend.dto.UpdateUserRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +64,7 @@ class UserControllerTest {
     @Test
     @WithMockUser(username = "admin@empoderado.com", roles = {"ADMIN"})
     void shouldUpdateCurrentUserProfile() throws Exception {
-        UpdateUserRequestDTO request = new UpdateUserRequestDTO(
+        UpdateUserRequest request = new UpdateUserRequest(
                 "Updated", "Name", "87654321", 
                 LocalDate.of(1985, 5, 15), "Updated Address"
         );
@@ -80,7 +80,7 @@ class UserControllerTest {
     @Test
     @WithMockUser(username = "admin@empoderado.com", roles = {"ADMIN"})
     void shouldChangePassword() throws Exception {
-        ChangePasswordRequestDTO request = new ChangePasswordRequestDTO("admin123", "newpassword123");
+        ChangePasswordRequest request = new ChangePasswordRequest("admin123", "newpassword123");
 
         mockMvc.perform(put("/api/user/me/password")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -92,7 +92,7 @@ class UserControllerTest {
     @Test
     @WithMockUser(username = "admin@empoderado.com", roles = {"ADMIN"})
     void shouldRejectWrongOldPassword() throws Exception {
-        ChangePasswordRequestDTO request = new ChangePasswordRequestDTO("wrongpassword", "newpassword123");
+        ChangePasswordRequest request = new ChangePasswordRequest("wrongpassword", "newpassword123");
 
         mockMvc.perform(put("/api/user/me/password")
                         .contentType(MediaType.APPLICATION_JSON)

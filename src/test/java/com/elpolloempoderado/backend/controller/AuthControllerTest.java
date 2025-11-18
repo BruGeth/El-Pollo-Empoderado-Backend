@@ -1,7 +1,7 @@
 package com.elpolloempoderado.backend.controller;
 
-import com.elpolloempoderado.backend.dto.LoginRequestDTO;
-import com.elpolloempoderado.backend.dto.RegisterRequestDTO;
+import com.elpolloempoderado.backend.dto.LoginRequest;
+import com.elpolloempoderado.backend.dto.RegisterRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ class AuthControllerTest {
 
     @Test
     void shouldRegisterNewUser() throws Exception {
-        RegisterRequestDTO request = new RegisterRequestDTO(
+        RegisterRequest request = new RegisterRequest(
                 "Test", "User", "test@example.com", "password123",
                 "12345678", LocalDate.of(1990, 1, 1), "Test Address"
         );
@@ -48,7 +48,7 @@ class AuthControllerTest {
 
     @Test
     void shouldLoginWithValidCredentials() throws Exception {
-        LoginRequestDTO request = new LoginRequestDTO("admin@empoderado.com", "admin123");
+        LoginRequest request = new LoginRequest("admin@empoderado.com", "admin123");
 
         mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -61,7 +61,7 @@ class AuthControllerTest {
 
     @Test
     void shouldRejectInvalidCredentials() throws Exception {
-        LoginRequestDTO request = new LoginRequestDTO("admin@empoderado.com", "wrongpassword");
+        LoginRequest request = new LoginRequest("admin@empoderado.com", "wrongpassword");
 
         mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -72,7 +72,7 @@ class AuthControllerTest {
 
     @Test
     void shouldRejectDuplicateEmail() throws Exception {
-        RegisterRequestDTO request = new RegisterRequestDTO(
+        RegisterRequest request = new RegisterRequest(
                 "Admin", "Test", "admin@empoderado.com", "password123",
                 "87654321", LocalDate.of(1985, 5, 15), "Admin Address"
         );

@@ -28,7 +28,7 @@ public class AuthService {
     private final UserDetailsService userDetailsService;
     private final JwtUtil jwtUtil;
 
-    public AuthResponseDTO register(RegisterRequestDTO request) {
+    public AuthResponse register(RegisterRequest request) {
         // Verificar si el email ya existe
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("Email already exists");
@@ -58,10 +58,10 @@ public class AuthService {
 
         // Crear respuesta
         UserDTO userDTO = convertToUserDTO(savedUser);
-        return new AuthResponseDTO(token, 86400000L, userDTO);
+        return new AuthResponse(token, 86400000L, userDTO);
     }
 
-    public AuthResponseDTO login(LoginRequestDTO request) {
+    public AuthResponse login(LoginRequest request) {
         // Autenticar usuario
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
@@ -76,7 +76,7 @@ public class AuthService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         UserDTO userDTO = convertToUserDTO(user);
-        return new AuthResponseDTO(token, 86400000L, userDTO);
+        return new AuthResponse(token, 86400000L, userDTO);
     }
 
     private UserDTO convertToUserDTO(User user) {

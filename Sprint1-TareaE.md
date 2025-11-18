@@ -146,16 +146,16 @@ Content-Type: application/json
 ## 🔧 Componentes Técnicos Implementados
 
 ### DTOs creados:
-- `UpdateUserRequestDTO` - Datos para actualizar perfil
-- `ChangePasswordRequestDTO` - Cambio de contraseña
+- `UpdateUserRequest` - Datos para actualizar perfil
+- `ChangePasswordRequest` - Cambio de contraseña
 
 ### Servicios:
 - `UserService` - Lógica de negocio para gestión de usuarios
   - `getAllUsers(Pageable)` - Lista paginada
   - `getUserById(Long)` - Usuario por ID
   - `getCurrentUser()` - Usuario autenticado
-  - `updateCurrentUser(UpdateUserRequestDTO)` - Actualizar perfil
-  - `changePassword(ChangePasswordRequestDTO)` - Cambiar contraseña
+  - `updateCurrentUser(UpdateUserRequest)` - Actualizar perfil
+  - `changePassword(ChangePasswordRequest)` - Cambiar contraseña
 
 ### Controladores:
 - `UserController` - Endpoints `/api/users/**` y `/api/user/**`

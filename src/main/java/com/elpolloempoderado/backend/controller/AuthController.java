@@ -1,8 +1,8 @@
 package com.elpolloempoderado.backend.controller;
 
-import com.elpolloempoderado.backend.dto.AuthResponseDTO;
-import com.elpolloempoderado.backend.dto.LoginRequestDTO;
-import com.elpolloempoderado.backend.dto.RegisterRequestDTO;
+import com.elpolloempoderado.backend.dto.AuthResponse;
+import com.elpolloempoderado.backend.dto.LoginRequest;
+import com.elpolloempoderado.backend.dto.RegisterRequest;
 import com.elpolloempoderado.backend.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,9 +20,9 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequestDTO request) {
+    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
         try {
-            AuthResponseDTO response = authService.register(request);
+            AuthResponse response = authService.register(request);
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (RuntimeException e) {
             Map<String, String> error = new HashMap<>();
@@ -32,9 +32,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequestDTO request) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         try {
-            AuthResponseDTO response = authService.login(request);
+            AuthResponse response = authService.login(request);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             Map<String, String> error = new HashMap<>();
