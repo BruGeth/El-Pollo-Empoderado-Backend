@@ -42,7 +42,7 @@ class UserControllerTest {
     @WithMockUser(username = "user@example.com", roles = {"USER"})
     void shouldRejectGetAllUsersAsUser() throws Exception {
         mockMvc.perform(get("/api/users"))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isForbidden());
     }
 
     @Test
