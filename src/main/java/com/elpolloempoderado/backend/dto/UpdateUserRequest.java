@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateUserRequestDTO {
+public class UpdateUserRequest {
     private String firstName;
     private String lastName;
     private String dni;

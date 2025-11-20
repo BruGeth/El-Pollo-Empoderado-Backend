@@ -1,7 +1,7 @@
 package com.elpolloempoderado.backend.controller;
 
-import com.elpolloempoderado.backend.dto.ChangePasswordRequestDTO;
-import com.elpolloempoderado.backend.dto.UpdateUserRequestDTO;
+import com.elpolloempoderado.backend.dto.ChangePasswordRequest;
+import com.elpolloempoderado.backend.dto.UpdateUserRequest;
 import com.elpolloempoderado.backend.dto.UserDTO;
 import com.elpolloempoderado.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -61,7 +61,7 @@ public class UserController {
     }
 
     @PutMapping("/user/me")
-    public ResponseEntity<?> updateCurrentUser(@RequestBody UpdateUserRequestDTO request) {
+    public ResponseEntity<?> updateCurrentUser(@RequestBody UpdateUserRequest request) {
         try {
             UserDTO updatedUser = userService.updateCurrentUser(request);
             return ResponseEntity.ok(updatedUser);
@@ -74,7 +74,7 @@ public class UserController {
 
     // E.3 - Cambio de contraseña
     @PutMapping("/user/me/password")
-    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequestDTO request) {
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request) {
         try {
             userService.changePassword(request);
             Map<String, String> response = new HashMap<>();

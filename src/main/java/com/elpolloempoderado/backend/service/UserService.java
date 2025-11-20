@@ -1,7 +1,7 @@
 package com.elpolloempoderado.backend.service;
 
-import com.elpolloempoderado.backend.dto.ChangePasswordRequestDTO;
-import com.elpolloempoderado.backend.dto.UpdateUserRequestDTO;
+import com.elpolloempoderado.backend.dto.ChangePasswordRequest;
+import com.elpolloempoderado.backend.dto.UpdateUserRequest;
 import com.elpolloempoderado.backend.dto.UserDTO;
 import com.elpolloempoderado.backend.model.Role;
 import com.elpolloempoderado.backend.model.User;
@@ -44,7 +44,7 @@ public class UserService {
         return convertToUserDTO(user);
     }
 
-    public UserDTO updateCurrentUser(UpdateUserRequestDTO request) {
+    public UserDTO updateCurrentUser(UpdateUserRequest request) {
         String email = SecurityUtil.getCurrentUserEmail();
         if (email == null) {
             throw new RuntimeException("User not authenticated");
@@ -74,7 +74,7 @@ public class UserService {
         return convertToUserDTO(savedUser);
     }
 
-    public void changePassword(ChangePasswordRequestDTO request) {
+    public void changePassword(ChangePasswordRequest request) {
         String email = SecurityUtil.getCurrentUserEmail();
         if (email == null) {
             throw new RuntimeException("User not authenticated");

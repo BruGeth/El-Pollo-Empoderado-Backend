@@ -81,7 +81,7 @@ Definir entidades Usuario y Rol con persistencia JPA, incluyendo repositorios, D
   - `existsByEmail(String email)`
 - ✅ DTOs implementados:
   - `UserDTO` - Para transferencia segura (sin password)
-  - `RegisterRequestDTO` - Para registro de usuarios
+  - `RegisterRequest` - Para registro de usuarios
 
 **Criterios de aceptación**: ✅ Persistencia funciona, UserRepository permite CRUD básico, contraseña no en texto plano
 
@@ -163,7 +163,7 @@ INSERT INTO user_roles (user_id, role_id) VALUES (1, 2);
 
 ### DTOs
 - `src/main/java/.../dto/UserDTO.java` - DTO para transferencia segura
-- `src/main/java/.../dto/RegisterRequestDTO.java` - DTO para registro
+- `src/main/java/.../dto/RegisterRequest.java` - DTO para registro
 
 ### Configuración
 - `src/main/java/.../config/PasswordConfig.java` - Configuración BCrypt
@@ -250,7 +250,7 @@ private Set<Role> roles;
 - ✅ `UserRepository.findByEmail()` para autenticación
 
 ### Para Tarea D (Endpoints Auth)
-- ✅ `RegisterRequestDTO` listo para endpoint registro
+- ✅ `RegisterRequest` listo para endpoint registro
 - ✅ `UserDTO` listo para respuestas seguras
 - ✅ Usuario admin para testing
 
