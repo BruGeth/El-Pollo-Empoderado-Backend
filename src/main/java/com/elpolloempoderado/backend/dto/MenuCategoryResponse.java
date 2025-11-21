@@ -1,0 +1,21 @@
+package com.elpolloempoderado.backend.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+/**
+ * DTO que representa una categoría con sus platos para el menú
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class MenuCategoryResponse {
+    
+    private Long id;
+    private String name;
+    private String description;
+    private List<MenuDishResponse> dishes;
+}
