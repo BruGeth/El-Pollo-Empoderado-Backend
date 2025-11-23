@@ -34,3 +34,4 @@ build/
 
 ### Variables Locales ###
 src/main/resources/application-local.yml
+.env
