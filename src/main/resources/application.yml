@@ -1,15 +1,21 @@
 spring:
   profiles:
-    active: local  # perfil por defecto
+    active: ${SPRING_PROFILE:local}  # perfil por defecto
 
   jpa:
     hibernate:
-      ddl-auto: update  # crea o actualiza las tablas automáticamente (puedes cambiar a validate más adelante)
-    show-sql: true
+      ddl-auto: ${JPA_DDL_AUTO:update}  # crea o actualiza las tablas automáticamente
+    show-sql: ${JPA_SHOW_SQL:true}
     properties:
       hibernate:
-        format_sql: true
+        format_sql: ${JPA_FORMAT_SQL:true}
 
 jwt:
   secret: ${JWT_SECRET:mySecretKeyForPolloEmpoderadoBackend2024}
   expiration: ${JWT_EXPIRATION:86400000} # 24 horas en milisegundos
+
+cors:
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:4200}
+  allowed-methods: ${CORS_ALLOWED_METHODS:GET,POST,PUT,DELETE,OPTIONS}
+  allowed-headers: ${CORS_ALLOWED_HEADERS:*}
+  allow-credentials: ${CORS_ALLOW_CREDENTIALS:true}

@@ -1,10 +1,13 @@
 spring:
   datasource:
-    url: ${DB_URL}
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?useSSL=${DB_USE_SSL:true}&allowPublicKeyRetrieval=true&serverTimezone=${DB_TIMEZONE:UTC}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: validate  # Solo valida el esquema, no modifica tablas en producción
-    show-sql: false
+      ddl-auto: ${JPA_DDL_AUTO:validate}  # Solo valida el esquema en producción
+    show-sql: ${JPA_SHOW_SQL:false}
+
+cors:
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:https://tu-frontend.vercel.app}
