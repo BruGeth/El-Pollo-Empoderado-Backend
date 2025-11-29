@@ -1,0 +1,84 @@
+{
+  "properties": [
+    {
+      "name": "jwt.secret",
+      "type": "java.lang.String",
+      "description": "Clave secreta para firmar y verificar tokens JWT. Debe ser cambiada en producción y mantenerse en variables de entorno.",
+      "defaultValue": "mySecretKeyForPolloEmpoderadoBackend2024"
+    },
+    {
+      "name": "jwt.expiration",
+      "type": "java.lang.Long",
+      "description": "Tiempo de expiración del token JWT en milisegundos. Por defecto 24 horas (86400000 ms).",
+      "defaultValue": 86400000
+    },
+    {
+      "name": "cors.allowed-origins",
+      "type": "java.lang.String",
+      "description": "Orígenes permitidos para realizar peticiones CORS al backend. Separados por coma. En producción, especificar solo los dominios autorizados.",
+      "defaultValue": "http://localhost:4200"
+    },
+    {
+      "name": "cors.allowed-methods",
+      "type": "java.lang.String",
+      "description": "Métodos HTTP permitidos para peticiones CORS. Separados por coma.",
+      "defaultValue": "GET,POST,PUT,DELETE,OPTIONS"
+    },
+    {
+      "name": "cors.allowed-headers",
+      "type": "java.lang.String",
+      "description": "Headers HTTP permitidos en las peticiones CORS. El valor '*' permite todos los headers.",
+      "defaultValue": "*"
+    },
+    {
+      "name": "cors.allow-credentials",
+      "type": "java.lang.Boolean",
+      "description": "Permite el envío de credenciales (cookies, authorization headers) en peticiones CORS.",
+      "defaultValue": true
+    }
+  ],
+  "hints": [
+    {
+      "name": "cors.allowed-methods",
+      "values": [
+        {
+          "value": "GET",
+          "description": "Método HTTP GET para consultar recursos"
+        },
+        {
+          "value": "POST",
+          "description": "Método HTTP POST para crear recursos"
+        },
+        {
+          "value": "PUT",
+          "description": "Método HTTP PUT para actualizar recursos"
+        },
+        {
+          "value": "DELETE",
+          "description": "Método HTTP DELETE para eliminar recursos"
+        },
+        {
+          "value": "OPTIONS",
+          "description": "Método HTTP OPTIONS para preflight CORS"
+        },
+        {
+          "value": "PATCH",
+          "description": "Método HTTP PATCH para actualizaciones parciales"
+        }
+      ]
+    },
+    {
+      "name": "cors.allow-credentials",
+      "values": [
+        {
+          "value": "true",
+          "description": "Permitir credenciales en peticiones CORS"
+        },
+        {
+          "value": "false",
+          "description": "No permitir credenciales en peticiones CORS"
+        }
+      ]
+    }
+  ]
+}
