@@ -62,6 +62,7 @@ public class DishServiceImpl implements DishService {
         dish.setName(request.getName());
         dish.setDescription(request.getDescription());
         dish.setPrice(request.getPrice());
+        dish.setOriginalPrice(request.getOriginalPrice());
         dish.setImageUrl(request.getImageUrl());
         dish.setCategory(category);
         
@@ -83,6 +84,7 @@ public class DishServiceImpl implements DishService {
         dish.setName(request.getName());
         dish.setDescription(request.getDescription());
         dish.setPrice(request.getPrice());
+        dish.setOriginalPrice(request.getOriginalPrice());
         dish.setImageUrl(request.getImageUrl());
         dish.setCategory(category);
         

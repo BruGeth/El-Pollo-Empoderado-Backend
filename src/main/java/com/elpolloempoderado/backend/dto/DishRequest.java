@@ -25,6 +25,9 @@ public class DishRequest {
     @DecimalMin(value = "0.01", message = "El precio debe ser mayor a 0")
     private BigDecimal price;
     
+    @DecimalMin(value = "0.01", message = "El precio original debe ser mayor a 0")
+    private BigDecimal originalPrice; // Opcional: precio antes del descuento
+    
     private String imageUrl;
     
     @NotNull(message = "La categoría es requerida")

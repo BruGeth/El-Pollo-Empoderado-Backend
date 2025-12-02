@@ -39,6 +39,9 @@ public class Dish {
     @Column(nullable = false)
     private BigDecimal price;
 
+    @Column(name = "original_price")
+    private BigDecimal originalPrice; // Precio anterior (para mostrar descuentos)
+
     private String imageUrl;
 
     // ManyToOne: cada Dish pertenece a una Category.
@@ -53,6 +56,16 @@ public class Dish {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.imageUrl = imageUrl;
+        this.category = category;
+    }
+
+    // Constructor con precio original
+    public Dish(String name, String description, BigDecimal price, BigDecimal originalPrice, String imageUrl, Category category) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.originalPrice = originalPrice;
         this.imageUrl = imageUrl;
         this.category = category;
     }

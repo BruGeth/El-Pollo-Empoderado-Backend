@@ -8,14 +8,24 @@ spring:
     show-sql: ${JPA_SHOW_SQL:true}
     properties:
       hibernate:
-        format_sql: ${JPA_FORMAT_SQL:true}
+        '[format_sql]': ${JPA_FORMAT_SQL:true}
 
+# Configuración de JWT (JSON Web Token)
 jwt:
+  # Clave secreta para firmar y verificar tokens JWT
+  # IMPORTANTE: Cambiar en producción y mantener en variables de entorno
   secret: ${JWT_SECRET:mySecretKeyForPolloEmpoderadoBackend2024}
-  expiration: ${JWT_EXPIRATION:86400000} # 24 horas en milisegundos
+  # Tiempo de expiración del token en milisegundos (24 horas = 86400000 ms)
+  expiration: ${JWT_EXPIRATION:86400000}
 
+# Configuración de CORS (Cross-Origin Resource Sharing)
 cors:
+  # Orígenes permitidos para realizar peticiones al backend
+  # En producción, especificar solo los dominios autorizados
   allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:4200}
+  # Métodos HTTP permitidos
   allowed-methods: ${CORS_ALLOWED_METHODS:GET,POST,PUT,DELETE,OPTIONS}
+  # Headers permitidos en las peticiones
   allowed-headers: ${CORS_ALLOWED_HEADERS:*}
+  # Permitir credenciales (cookies, authorization headers)
   allow-credentials: ${CORS_ALLOW_CREDENTIALS:true}

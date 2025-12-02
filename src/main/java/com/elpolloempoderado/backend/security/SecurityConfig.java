@@ -33,6 +33,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/index").permitAll()
                         .requestMatchers("/api/health").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/categories/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/dishes/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/menu").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint(authenticationEntryPoint)

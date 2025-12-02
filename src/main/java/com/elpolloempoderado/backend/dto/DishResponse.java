@@ -15,6 +15,7 @@ public class DishResponse {
     private String name;
     private String description;
     private BigDecimal price;
+    private BigDecimal originalPrice; // Precio anterior para mostrar descuentos
     private String imageUrl;
     private Long categoryId;
     private String categoryName;
@@ -27,6 +28,7 @@ public class DishResponse {
         response.setName(dish.getName());
         response.setDescription(dish.getDescription());
         response.setPrice(dish.getPrice());
+        response.setOriginalPrice(dish.getOriginalPrice());
         response.setImageUrl(dish.getImageUrl());
         
         // Incluir información de la categoría si está presente
