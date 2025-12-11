@@ -1,7 +1,11 @@
 package com.elpolloempoderado.backend.config;
 
+import com.elpolloempoderado.backend.model.City;
+import com.elpolloempoderado.backend.model.District;
 import com.elpolloempoderado.backend.model.Role;
 import com.elpolloempoderado.backend.model.User;
+import com.elpolloempoderado.backend.repository.CityRepository;
+import com.elpolloempoderado.backend.repository.DistrictRepository;
 import com.elpolloempoderado.backend.repository.RoleRepository;
 import com.elpolloempoderado.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,11 +23,56 @@ public class DataInitializer implements CommandLineRunner {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final CityRepository cityRepository;
+    private final DistrictRepository districtRepository;
     
     @Override
     public void run(String... args) throws Exception {
+        initializeCitiesAndDistricts();
         initializeRoles();
         initializeAdminUser();
+    }
+    
+    /**
+     * Inicializa las ciudades y distritos en la base de datos
+     */
+    private void initializeCitiesAndDistricts() {
+        // Solo inicializar si no existen ciudades
+        if (cityRepository.count() == 0) {
+            // Crear ciudades
+            City lima = cityRepository.save(new City(null, "Lima"));
+            City callao = cityRepository.save(new City(null, "Callao"));
+            City trujillo = cityRepository.save(new City(null, "Trujillo"));
+            City chiclayo = cityRepository.save(new City(null, "Chiclayo"));
+            City piura = cityRepository.save(new City(null, "Piura"));
+            City ica = cityRepository.save(new City(null, "Ica"));
+            City huacho = cityRepository.save(new City(null, "Huacho"));
+            
+            // Crear distritos de Lima
+            districtRepository.save(new District(null, "Comas", lima));
+            districtRepository.save(new District(null, "Ate", lima));
+            districtRepository.save(new District(null, "San Martín de Porres", lima));
+            districtRepository.save(new District(null, "Miraflores", lima));
+            districtRepository.save(new District(null, "Surco", lima));
+            districtRepository.save(new District(null, "Chorrillos", lima));
+            districtRepository.save(new District(null, "La Molina", lima));
+            districtRepository.save(new District(null, "Santa Anita", lima));
+            districtRepository.save(new District(null, "Independencia", lima));
+            districtRepository.save(new District(null, "San Miguel", lima));
+            districtRepository.save(new District(null, "Lurín", lima));
+            districtRepository.save(new District(null, "Cercado de Lima", lima));
+            
+            // Crear distritos de Callao
+            districtRepository.save(new District(null, "Callao (Saenz Peña)", callao));
+            districtRepository.save(new District(null, "Callao (Elmer Faucett)", callao));
+            
+            // Crear distritos de otras ciudades
+            districtRepository.save(new District(null, "Trujillo", trujillo));
+            districtRepository.save(new District(null, "Chiclayo", chiclayo));
+            districtRepository.save(new District(null, "Piura", piura));
+            districtRepository.save(new District(null, "Ica", ica));
+            districtRepository.save(new District(null, "Huacho", huacho));
+        }
     }
     
     private void initializeRoles() {

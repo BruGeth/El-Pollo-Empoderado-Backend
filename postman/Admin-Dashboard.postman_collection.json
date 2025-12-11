@@ -1,0 +1,623 @@
+{
+	"info": {
+		"_postman_id": "admin-12345-6789-abcd-efgh",
+		"name": "El Pollo Empoderado - Admin Dashboard",
+		"description": "Endpoints administrativos para el dashboard (requieren ROLE_ADMIN)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "0. Auth - Login Admin",
+			"item": [
+				{
+					"name": "Login Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    pm.environment.set('admin_token', response.token);",
+									"    console.log('Token admin guardado');",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@empoderado.com\",\n  \"password\": \"admin123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "login"]
+						},
+						"description": "Login de administrador - Ejecutar PRIMERO"
+					}
+				}
+			]
+		},
+		{
+			"name": "1. Users - Gestión de Usuarios",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/users?page=0&size=20",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users"],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								}
+							]
+						},
+						"description": "Listar todos los usuarios con paginación"
+					}
+				},
+				{
+					"name": "Get User By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/users/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "users", "1"]
+						},
+						"description": "Obtener detalles de un usuario específico"
+					}
+				}
+			]
+		},
+		{
+			"name": "2. Categories - Gestión de Categorías",
+			"item": [
+				{
+					"name": "Get All Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/categories",
+							"host": ["{{base_url}}"],
+							"path": ["api", "categories"]
+						},
+						"description": "Listar todas las categorías"
+					}
+				},
+				{
+					"name": "Get Category By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/categories/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "categories", "1"]
+						},
+						"description": "Ver detalles de una categoría"
+					}
+				},
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Pollos a la Brasa\",\n  \"description\": \"Deliciosos pollos a la brasa con guarniciones\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/categories",
+							"host": ["{{base_url}}"],
+							"path": ["api", "categories"]
+						},
+						"description": "Crear nueva categoría"
+					}
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Pollos a la Brasa Premium\",\n  \"description\": \"Pollos a la brasa de calidad premium\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/categories/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "categories", "1"]
+						},
+						"description": "Actualizar categoría existente"
+					}
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/categories/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "categories", "1"]
+						},
+						"description": "Eliminar una categoría"
+					}
+				}
+			]
+		},
+		{
+			"name": "3. Dishes - Gestión de Platos",
+			"item": [
+				{
+					"name": "Get All Dishes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/dishes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "dishes"]
+						},
+						"description": "Listar todos los platos"
+					}
+				},
+				{
+					"name": "Get Dish By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/dishes/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "dishes", "1"]
+						},
+						"description": "Ver detalles de un plato"
+					}
+				},
+				{
+					"name": "Get Dishes By Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/dishes/category/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "dishes", "category", "1"]
+						},
+						"description": "Filtrar platos por categoría"
+					}
+				},
+				{
+					"name": "Create Dish - Pollo Entero",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Pollo Entero a la Brasa\",\n  \"description\": \"Pollo entero marinado con especias secretas, acompañado de papas fritas y ensalada\",\n  \"price\": 55.00,\n  \"imageUrl\": \"https://images.unsplash.com/photo-1598103442097-8b74394b95c6\",\n  \"categoryId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/dishes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "dishes"]
+						},
+						"description": "Crear nuevo plato"
+					}
+				},
+				{
+					"name": "Create Dish - 1/2 Pollo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"1/2 Pollo a la Brasa\",\n  \"description\": \"Medio pollo con papas fritas y ensalada fresca\",\n  \"price\": 30.00,\n  \"imageUrl\": \"https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58\",\n  \"categoryId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/dishes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "dishes"]
+						},
+						"description": "Crear medio pollo"
+					}
+				},
+				{
+					"name": "Create Dish - Bebida",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Inca Kola 1.5L\",\n  \"description\": \"Gaseosa Inca Kola familiar\",\n  \"price\": 8.00,\n  \"imageUrl\": \"https://images.unsplash.com/photo-1581006852262-e4307cf6283a\",\n  \"categoryId\": 4\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/dishes",
+							"host": ["{{base_url}}"],
+							"path": ["api", "dishes"]
+						},
+						"description": "Crear bebida"
+					}
+				},
+				{
+					"name": "Update Dish",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Pollo Entero Premium\",\n  \"description\": \"Pollo entero premium marinado 24 horas\",\n  \"price\": 60.00,\n  \"imageUrl\": \"https://images.unsplash.com/photo-1598103442097-8b74394b95c6\",\n  \"categoryId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/dishes/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "dishes", "1"]
+						},
+						"description": "Actualizar plato existente"
+					}
+				},
+				{
+					"name": "Delete Dish",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/dishes/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "dishes", "1"]
+						},
+						"description": "Eliminar un plato"
+					}
+				}
+			]
+		},
+		{
+			"name": "4. Locals - Gestión de Locales",
+			"item": [
+				{
+					"name": "Get All Locals",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/locals",
+							"host": ["{{base_url}}"],
+							"path": ["api", "locals"]
+						},
+						"description": "Listar todos los locales"
+					}
+				},
+				{
+					"name": "Get Local By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/locals/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "locals", "1"]
+						},
+						"description": "Ver detalles de un local"
+					}
+				},
+				{
+					"name": "Get Locals By City",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/locals/city/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "locals", "city", "1"]
+						},
+						"description": "Filtrar locales por ciudad"
+					}
+				},
+				{
+					"name": "Get Locals By District",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/locals/district/4",
+							"host": ["{{base_url}}"],
+							"path": ["api", "locals", "district", "4"]
+						},
+						"description": "Filtrar locales por distrito"
+					}
+				},
+				{
+					"name": "Create Local - Miraflores",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"El Pollo Empoderado - Miraflores\",\n  \"distritoId\": 4,\n  \"direccion\": \"Av. Larco 1234, Miraflores\",\n  \"telefono\": \"01-4567890\",\n  \"horario\": \"Lun-Dom: 11:00 AM - 11:00 PM\",\n  \"imagenUrl\": \"https://example.com/local-miraflores.jpg\",\n  \"mapsUrl\": \"https://maps.google.com/?q=Miraflores+Lima\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/locals",
+							"host": ["{{base_url}}"],
+							"path": ["api", "locals"]
+						},
+						"description": "Crear nuevo local"
+					}
+				},
+				{
+					"name": "Create Local - Surco",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"El Pollo Empoderado - Surco\",\n  \"distritoId\": 5,\n  \"direccion\": \"Av. Primavera 5678, Surco\",\n  \"telefono\": \"01-7654321\",\n  \"horario\": \"Lun-Dom: 12:00 PM - 10:00 PM\",\n  \"imagenUrl\": \"https://example.com/local-surco.jpg\",\n  \"mapsUrl\": \"https://maps.google.com/?q=Surco+Lima\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/locals",
+							"host": ["{{base_url}}"],
+							"path": ["api", "locals"]
+						},
+						"description": "Crear local en Surco"
+					}
+				},
+				{
+					"name": "Create Local - San Miguel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"El Pollo Empoderado - San Miguel\",\n  \"distritoId\": 10,\n  \"direccion\": \"Av. La Marina 9012, San Miguel\",\n  \"telefono\": \"01-3456789\",\n  \"horario\": \"Lun-Sab: 11:30 AM - 10:30 PM\",\n  \"imagenUrl\": \"https://example.com/local-sanmiguel.jpg\",\n  \"mapsUrl\": \"https://maps.google.com/?q=San+Miguel+Lima\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/locals",
+							"host": ["{{base_url}}"],
+							"path": ["api", "locals"]
+						},
+						"description": "Crear local en San Miguel"
+					}
+				},
+				{
+					"name": "Update Local",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"telefono\": \"01-9999999\",\n  \"horario\": \"Lun-Dom: 10:00 AM - 12:00 AM\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/locals/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "locals", "1"]
+						},
+						"description": "Actualizar información de un local"
+					}
+				},
+				{
+					"name": "Delete Local",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/locals/1",
+							"host": ["{{base_url}}"],
+							"path": ["api", "locals", "1"]
+						},
+						"description": "Eliminar un local"
+					}
+				}
+			]
+		},
+		{
+			"name": "5. Locations - Consulta de Ubicaciones",
+			"item": [
+				{
+					"name": "Get All Cities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/locations/cities",
+							"host": ["{{base_url}}"],
+							"path": ["api", "locations", "cities"]
+						},
+						"description": "Ver todas las ciudades disponibles"
+					}
+				},
+				{
+					"name": "Get All Districts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/locations/districts",
+							"host": ["{{base_url}}"],
+							"path": ["api", "locations", "districts"]
+						},
+						"description": "Ver todos los distritos"
+					}
+				},
+				{
+					"name": "Get Districts By City",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/locations/cities/1/districts",
+							"host": ["{{base_url}}"],
+							"path": ["api", "locations", "cities", "1", "districts"]
+						},
+						"description": "Ver distritos de una ciudad"
+					}
+				}
+			]
+		},
+		{
+			"name": "6. Menu - Consulta de Menú",
+			"item": [
+				{
+					"name": "Get Full Menu",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/menu",
+							"host": ["{{base_url}}"],
+							"path": ["api", "menu"]
+						},
+						"description": "Ver menú completo con todas las categorías y platos"
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "admin_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

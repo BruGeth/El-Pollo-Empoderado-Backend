@@ -17,4 +17,8 @@ public class RegisterRequest {
     private String dni;
     private LocalDate birthDate;
     private String address;
+    private String telefono;
+    private String referenceHome;
+    private Long cityId;      // ID de la ciudad (opcional)
+    private Long districtId;  // ID del distrito (opcional)
 }

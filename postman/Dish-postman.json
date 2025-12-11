@@ -1,0 +1,248 @@
+{
+  "info": {
+    "_postman_id": "f25931b3-1dbc-4ad1-91c8-f6c1d3e8cbf9",
+    "name": "El Pollo Empoderado - Dish Endpoints",
+    "description": "Endpoints para la gestión de platos (dishes)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Get All Dishes",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/dishes",
+          "host": ["{{base_url}}"],
+          "path": ["api", "dishes"]
+        },
+        "description": "Obtiene todos los platos disponibles"
+      }
+    },
+    {
+      "name": "Get Dish By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/dishes/1",
+          "host": ["{{base_url}}"],
+          "path": ["api", "dishes", "1"]
+        },
+        "description": "Obtiene un plato específico por su ID"
+      }
+    },
+    {
+      "name": "Get Dishes By Category",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/dishes/category/1",
+          "host": ["{{base_url}}"],
+          "path": ["api", "dishes", "category", "1"]
+        },
+        "description": "Obtiene todos los platos de una categoría específica"
+      }
+    },
+    {
+      "name": "Create Dish (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Pollo Entero a la Brasa\",\n  \"description\": \"Pollo entero marinado con especias secretas, acompañado de papas fritas y ensalada\",\n  \"price\": 55.00,\n  \"imageUrl\": \"https://images.unsplash.com/photo-1598103442097-8b74394b95c6\",\n  \"categoryId\": 1\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/dishes",
+          "host": ["{{base_url}}"],
+          "path": ["api", "dishes"]
+        },
+        "description": "Crea un nuevo plato (requiere rol ADMIN)"
+      }
+    },
+    {
+      "name": "Create Dish - 1/2 Pollo (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"1/2 Pollo a la Brasa\",\n  \"description\": \"Medio pollo con papas fritas y ensalada fresca\",\n  \"price\": 30.00,\n  \"imageUrl\": \"https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58\",\n  \"categoryId\": 1\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/dishes",
+          "host": ["{{base_url}}"],
+          "path": ["api", "dishes"]
+        },
+        "description": "Ejemplo: Crear medio pollo"
+      }
+    },
+    {
+      "name": "Create Dish - Anticuchos (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Anticuchos de Corazón\",\n  \"description\": \"Brochetas de corazón marinadas con ají panca, incluye papa y choclo\",\n  \"price\": 25.00,\n  \"imageUrl\": \"https://images.unsplash.com/photo-1529042410759-befb1204b468\",\n  \"categoryId\": 2\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/dishes",
+          "host": ["{{base_url}}"],
+          "path": ["api", "dishes"]
+        },
+        "description": "Ejemplo: Crear anticuchos (categoría Parrillas)"
+      }
+    },
+    {
+      "name": "Create Dish - Bebida (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Inca Kola 1.5L\",\n  \"description\": \"Gaseosa Inca Kola familiar\",\n  \"price\": 8.00,\n  \"imageUrl\": \"https://images.unsplash.com/photo-1581006852262-e4307cf6283a\",\n  \"categoryId\": 4\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/dishes",
+          "host": ["{{base_url}}"],
+          "path": ["api", "dishes"]
+        },
+        "description": "Ejemplo: Crear bebida"
+      }
+    },
+    {
+      "name": "Update Dish (Admin)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Pollo Entero a la Brasa Premium\",\n  \"description\": \"Pollo entero premium marinado 24 horas con especias secretas, acompañado de papas fritas crujientes y ensalada fresca\",\n  \"price\": 60.00,\n  \"imageUrl\": \"https://images.unsplash.com/photo-1598103442097-8b74394b95c6\",\n  \"categoryId\": 1\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/dishes/1",
+          "host": ["{{base_url}}"],
+          "path": ["api", "dishes", "1"]
+        },
+        "description": "Actualiza un plato existente (requiere rol ADMIN)"
+      }
+    },
+    {
+      "name": "Update Dish - Change Category (Admin)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Combo Pollo Entero\",\n  \"description\": \"Pollo entero con papas, ensalada y gaseosa 1.5L\",\n  \"price\": 65.00,\n  \"imageUrl\": \"https://images.unsplash.com/photo-1598103442097-8b74394b95c6\",\n  \"categoryId\": 6\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/dishes/1",
+          "host": ["{{base_url}}"],
+          "path": ["api", "dishes", "1"]
+        },
+        "description": "Ejemplo: Cambiar un plato a otra categoría (ej: de Pollos a Combos)"
+      }
+    },
+    {
+      "name": "Delete Dish (Admin)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{admin_token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/dishes/1",
+          "host": ["{{base_url}}"],
+          "path": ["api", "dishes", "1"]
+        },
+        "description": "Elimina un plato (requiere rol ADMIN)"
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "admin_token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}

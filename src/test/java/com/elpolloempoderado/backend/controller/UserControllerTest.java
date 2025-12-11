@@ -66,7 +66,8 @@ class UserControllerTest {
     void shouldUpdateCurrentUserProfile() throws Exception {
         UpdateUserRequest request = new UpdateUserRequest(
                 "Updated", "Name", "87654321", 
-                LocalDate.of(1985, 5, 15), "Updated Address"
+                LocalDate.of(1985, 5, 15), "Updated Address", 
+                null, null, null, null
         );
 
         mockMvc.perform(put("/api/user/me")

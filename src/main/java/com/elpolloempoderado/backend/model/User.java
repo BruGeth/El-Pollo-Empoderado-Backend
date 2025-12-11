@@ -40,6 +40,22 @@ public class User {
     @Column(length = 255)
     private String address;
     
+    @Column(length = 20)
+    private String telefono;
+    
+    @Column(length = 255)
+    private String referenceHome;
+    
+    // Relación opcional con City (ciudad)
+    @ManyToOne
+    @JoinColumn(name = "ciudad_id")
+    private City city;
+    
+    // Relación opcional con District (distrito)
+    @ManyToOne
+    @JoinColumn(name = "distrito_id")
+    private District district;
+    
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "user_roles",
