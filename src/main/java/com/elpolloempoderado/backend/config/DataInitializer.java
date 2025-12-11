@@ -1,9 +1,11 @@
 package com.elpolloempoderado.backend.config;
 
+import com.elpolloempoderado.backend.model.Address;
 import com.elpolloempoderado.backend.model.City;
 import com.elpolloempoderado.backend.model.District;
 import com.elpolloempoderado.backend.model.Role;
 import com.elpolloempoderado.backend.model.User;
+import com.elpolloempoderado.backend.repository.AddressRepository;
 import com.elpolloempoderado.backend.repository.CityRepository;
 import com.elpolloempoderado.backend.repository.DistrictRepository;
 import com.elpolloempoderado.backend.repository.RoleRepository;
@@ -25,6 +27,7 @@ public class DataInitializer implements CommandLineRunner {
     private final PasswordEncoder passwordEncoder;
     private final CityRepository cityRepository;
     private final DistrictRepository districtRepository;
+    private final AddressRepository addressRepository;
     
     @Override
     public void run(String... args) throws Exception {
@@ -96,10 +99,34 @@ public class DataInitializer implements CommandLineRunner {
             admin.setPassword(passwordEncoder.encode("admin123"));
             admin.setDni("12345678");
             admin.setBirthDate(LocalDate.of(1990, 1, 1));
-            admin.setAddress("Lima, Perú");
             admin.setRoles(Set.of(adminRole));
             
-            userRepository.save(admin);
+            User savedAdmin = userRepository.save(admin);
+            
+            // Crear dirección para el admin
+            // Buscar Lima y Cercado de Lima (deben existir de initializeCitiesAndDistricts)
+            City lima = cityRepository.findAll().stream()
+                    .filter(c -> c.getNombre().equals("Lima"))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("Ciudad Lima no encontrada"));
+            
+            District cercadoLima = districtRepository.findAll().stream()
+                    .filter(d -> d.getNombre().equals("Cercado de Lima") && d.getCity().getId().equals(lima.getId()))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("Distrito Cercado de Lima no encontrado"));
+            
+            Address adminAddress = new Address();
+            adminAddress.setUser(savedAdmin);
+            adminAddress.setStreet("Av. Javier Prado");
+            adminAddress.setNumber("123");
+            adminAddress.setPhone("987654321");
+            adminAddress.setReference("Edificio principal, frente al parque");
+            adminAddress.setCity(lima);
+            adminAddress.setDistrict(cercadoLima);
+            adminAddress.setLabel("Oficina");
+            adminAddress.setIsDefault(true);
+            
+            addressRepository.save(adminAddress);
         }
     }
 }
