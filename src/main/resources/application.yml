@@ -29,3 +29,12 @@ cors:
   allowed-headers: ${CORS_ALLOWED_HEADERS:*}
   # Permitir credenciales (cookies, authorization headers)
   allow-credentials: ${CORS_ALLOW_CREDENTIALS:true}
+
+# Configuración de MercadoPago
+mercadopago:
+  access-token: ${MERCADOPAGO_ACCESS_TOKEN:TEST-6645123649247854-121102-3162dad69521755e2a4dd7dc911d5c89-608720469}
+  public-key: ${MERCADOPAGO_PUBLIC_KEY:TEST-85e01ca4-16a5-4f4b-9335-90dda2c3de08}
+
+# URL base del frontend (para redirecciones de pago)
+app:
+  base-url: ${APP_BASE_URL:http://localhost:4200}
