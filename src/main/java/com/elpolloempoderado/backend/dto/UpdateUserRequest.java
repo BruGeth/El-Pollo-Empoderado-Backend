@@ -6,6 +6,11 @@ import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
 
+/**
+ * DTO para actualización de datos de usuario
+ * Nota: Los campos de dirección fueron removidos.
+ * Las direcciones se actualizan a través de /api/addresses
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,9 +19,4 @@ public class UpdateUserRequest {
     private String lastName;
     private String dni;
     private LocalDate birthDate;
-    private String address;
-    private String telefono;
-    private String referenceHome;
-    private Long cityId;      // ID de la ciudad (opcional)
-    private Long districtId;  // ID del distrito (opcional)
 }
