@@ -1,12 +1,8 @@
 package com.elpolloempoderado.backend.service;
 
 import com.elpolloempoderado.backend.dto.*;
-import com.elpolloempoderado.backend.model.City;
-import com.elpolloempoderado.backend.model.District;
 import com.elpolloempoderado.backend.model.Role;
 import com.elpolloempoderado.backend.model.User;
-import com.elpolloempoderado.backend.repository.CityRepository;
-import com.elpolloempoderado.backend.repository.DistrictRepository;
 import com.elpolloempoderado.backend.repository.RoleRepository;
 import com.elpolloempoderado.backend.repository.UserRepository;
 import com.elpolloempoderado.backend.util.JwtUtil;
@@ -27,8 +23,6 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    private final CityRepository cityRepository;
-    private final DistrictRepository districtRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final UserDetailsService userDetailsService;
@@ -48,22 +42,8 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setDni(request.getDni());
         user.setBirthDate(request.getBirthDate());
-        user.setAddress(request.getAddress());
-        user.setTelefono(request.getTelefono());
-        user.setReferenceHome(request.getReferenceHome());
-        
-        // Asignar ciudad y distrito si están presentes (opcionales)
-        if (request.getCityId() != null) {
-            City city = cityRepository.findById(request.getCityId())
-                    .orElseThrow(() -> new RuntimeException("City not found"));
-            user.setCity(city);
-        }
-        
-        if (request.getDistrictId() != null) {
-            District district = districtRepository.findById(request.getDistrictId())
-                    .orElseThrow(() -> new RuntimeException("District not found"));
-            user.setDistrict(district);
-        }
+        // Nota: Los campos de dirección (address, telefono, reference_home, ciudad, distrito)
+        // ahora se manejan a través de la tabla addresses con múltiples direcciones por usuario
 
         // Asignar rol por defecto
         Role userRole = roleRepository.findByName("ROLE_USER")
@@ -112,13 +92,13 @@ public class AuthService {
                 user.getEmail(),
                 user.getDni(),
                 user.getBirthDate(),
-                user.getAddress(),
-                user.getTelefono(),
-                user.getReferenceHome(),
-                user.getCity() != null ? user.getCity().getId() : null,
-                user.getCity() != null ? user.getCity().getNombre() : null,
-                user.getDistrict() != null ? user.getDistrict().getId() : null,
-                user.getDistrict() != null ? user.getDistrict().getNombre() : null,
+                null, // address - deprecated
+                null, // telefono - deprecated
+                null, // referenceHome - deprecated
+                null, // cityId - deprecated
+                null, // cityName - deprecated
+                null, // districtId - deprecated
+                null, // districtName - deprecated
                 roleNames,
                 user.getCreatedAt()
         );
