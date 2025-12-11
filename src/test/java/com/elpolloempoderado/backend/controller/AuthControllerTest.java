@@ -33,7 +33,7 @@ class AuthControllerTest {
     void shouldRegisterNewUser() throws Exception {
         RegisterRequest request = new RegisterRequest(
                 "Test", "User", "test@example.com", "password123",
-                "12345678", LocalDate.of(1990, 1, 1), "Test Address"
+                "12345678", LocalDate.of(1990, 1, 1)
         );
 
         mockMvc.perform(post("/api/auth/register")
@@ -74,7 +74,7 @@ class AuthControllerTest {
     void shouldRejectDuplicateEmail() throws Exception {
         RegisterRequest request = new RegisterRequest(
                 "Admin", "Test", "admin@empoderado.com", "password123",
-                "87654321", LocalDate.of(1985, 5, 15), "Admin Address"
+                "87654321", LocalDate.of(1985, 5, 15)
         );
 
         mockMvc.perform(post("/api/auth/register")

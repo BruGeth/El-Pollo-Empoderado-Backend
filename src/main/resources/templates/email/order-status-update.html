@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualización de Pedido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #f8b500;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+        .content {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+        .status-box {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .status {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #f8b500;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 th:text="${appName}">El Pollo Empoderado</h1>
+        <p>Actualización de tu pedido</p>
+    </div>
+    
+    <div class="content">
+        <h2>Estado del Pedido Actualizado</h2>
+        <p>Hola <span th:text="${customerName}">Cliente</span>,</p>
+        <p>El estado de tu pedido <strong th:text="${orderNumber}">ORD-123456</strong> ha sido actualizado.</p>
+        
+        <div class="status-box">
+            <p>Estado actual:</p>
+            <p class="status" th:text="${status}">En preparación</p>
+        </div>
+        
+        <p>Puedes seguir el estado de tu pedido en tu panel de usuario.</p>
+        
+        <p style="margin-top: 20px;">
+            <strong>¡Gracias por tu preferencia!</strong>
+        </p>
+    </div>
+    
+    <div class="footer">
+        <p th:text="${appName}">El Pollo Empoderado</p>
+        <p>Este es un correo automático, por favor no responder.</p>
+    </div>
+</body>
+</html>

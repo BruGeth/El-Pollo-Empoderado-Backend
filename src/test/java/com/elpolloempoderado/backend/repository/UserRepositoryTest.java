@@ -34,7 +34,7 @@ class UserRepositoryTest {
         user.setPassword("hashedPassword");
         user.setDni("12345678");
         user.setBirthDate(LocalDate.of(1990, 1, 1));
-        user.setAddress("Test Address");
+        // Nota: Campo address eliminado - ahora se maneja en tabla addresses
         user.setRoles(Set.of(userRole));
         
         userRepository.save(user);

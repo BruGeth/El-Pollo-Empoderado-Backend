@@ -42,7 +42,8 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setDni(request.getDni());
         user.setBirthDate(request.getBirthDate());
-        user.setAddress(request.getAddress());
+        // Nota: Los campos de dirección (address, telefono, reference_home, ciudad, distrito)
+        // ahora se manejan a través de la tabla addresses con múltiples direcciones por usuario
 
         // Asignar rol por defecto
         Role userRole = roleRepository.findByName("ROLE_USER")
@@ -91,7 +92,13 @@ public class AuthService {
                 user.getEmail(),
                 user.getDni(),
                 user.getBirthDate(),
-                user.getAddress(),
+                null, // address - deprecated
+                null, // telefono - deprecated
+                null, // referenceHome - deprecated
+                null, // cityId - deprecated
+                null, // cityName - deprecated
+                null, // districtId - deprecated
+                null, // districtName - deprecated
                 roleNames,
                 user.getCreatedAt()
         );

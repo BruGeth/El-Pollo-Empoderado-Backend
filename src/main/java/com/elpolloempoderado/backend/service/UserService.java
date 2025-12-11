@@ -66,9 +66,8 @@ public class UserService {
         if (request.getBirthDate() != null) {
             user.setBirthDate(request.getBirthDate());
         }
-        if (request.getAddress() != null) {
-            user.setAddress(request.getAddress());
-        }
+        // Nota: Los campos de dirección (address, telefono, reference_home, ciudad, distrito)
+        // ahora se manejan a través de la tabla addresses con múltiples direcciones por usuario
 
         User savedUser = userRepository.save(user);
         return convertToUserDTO(savedUser);
@@ -101,7 +100,13 @@ public class UserService {
                 user.getEmail(),
                 user.getDni(),
                 user.getBirthDate(),
-                user.getAddress(),
+                null, // address - deprecated
+                null, // telefono - deprecated
+                null, // referenceHome - deprecated
+                null, // cityId - deprecated
+                null, // cityName - deprecated
+                null, // districtId - deprecated
+                null, // districtName - deprecated
                 user.getRoles().stream()
                         .map(Role::getName)
                         .collect(Collectors.toSet()),

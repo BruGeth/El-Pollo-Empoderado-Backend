@@ -11,3 +11,25 @@ spring:
   h2:
     console:
       enabled: true
+  mail:
+    host: localhost
+    port: 1025
+    username: test
+    password: test
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+
+# JWT Configuration
+jwt:
+  secret: test-secret-key-for-jwt-token-generation-minimum-256-bits-long
+  expiration: 86400000
+
+# MercadoPago Configuration (Test values for CI/CD)
+mercadopago:
+  access-token: TEST-ACCESS-TOKEN-FOR-TESTING
+  public-key: TEST-PUBLIC-KEY-FOR-TESTING
+  webhook-secret: test-webhook-secret

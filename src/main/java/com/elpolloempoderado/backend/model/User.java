@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -37,8 +39,19 @@ public class User {
     
     private LocalDate birthDate;
     
-    @Column(length = 255)
-    private String address;
+    /**
+     * Relación bidireccional con Address
+     * Un usuario puede tener múltiples direcciones de envío
+     */
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Address> addresses = new ArrayList<>();
+    
+    /**
+     * Relación bidireccional con Order
+     * Un usuario puede tener múltiples pedidos
+     */
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orders = new ArrayList<>();
     
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -54,5 +67,35 @@ public class User {
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
+    }
+    
+    // ==========================================
+    // HELPER METHODS
+    // ==========================================
+    
+    /**
+     * Agrega una dirección al usuario
+     */
+    public void addAddress(Address address) {
+        addresses.add(address);
+        address.setUser(this);
+    }
+    
+    /**
+     * Remueve una dirección del usuario
+     */
+    public void removeAddress(Address address) {
+        addresses.remove(address);
+        address.setUser(null);
+    }
+    
+    /**
+     * Obtiene la dirección por defecto del usuario
+     */
+    public Address getDefaultAddress() {
+        return addresses.stream()
+                .filter(Address::getIsDefault)
+                .findFirst()
+                .orElse(null);
     }
 }
