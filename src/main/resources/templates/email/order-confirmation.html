@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Pedido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #f8b500;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+        .content {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+        .order-info {
+            background-color: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .item {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        .item:last-child {
+            border-bottom: none;
+        }
+        .total {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #f8b500;
+            text-align: right;
+            margin-top: 15px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 8px;
+        }
+        .label {
+            font-weight: bold;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 th:text="${appName}">El Pollo Empoderado</h1>
+        <p>¡Gracias por tu pedido!</p>
+    </div>
+    
+    <div class="content">
+        <h2>Confirmación de Pedido</h2>
+        <p>Hola <span th:text="${customerName}">Cliente</span>,</p>
+        <p>Tu pedido ha sido confirmado y está siendo preparado.</p>
+        
+        <div class="order-info">
+            <table>
+                <tr>
+                    <td class="label">Número de Pedido:</td>
+                    <td th:text="${orderNumber}">ORD-123456</td>
+                </tr>
+                <tr>
+                    <td class="label">Fecha:</td>
+                    <td th:text="${orderDate}">01/12/2024 15:30</td>
+                </tr>
+                <tr>
+                    <td class="label">Entrega Estimada:</td>
+                    <td th:text="${estimatedDelivery}">01/12/2024 16:15</td>
+                </tr>
+                <tr>
+                    <td class="label">Método de Pago:</td>
+                    <td th:text="${paymentMethod}">MercadoPago</td>
+                </tr>
+            </table>
+        </div>
+        
+        <h3>Detalle del Pedido</h3>
+        <div class="order-info">
+            <div th:each="item : ${items}" class="item">
+                <table style="width: 100%">
+                    <tr>
+                        <td th:text="${item.dish.name}">Pollo a la Brasa</td>
+                        <td style="text-align: right">
+                            <span th:text="${item.quantity}">1</span> x 
+                            <span th:text="'S/ ' + ${item.unitPrice}">S/ 55.00</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="text-align: right; font-weight: bold">
+                            <span th:text="'S/ ' + ${item.subtotal}">S/ 55.00</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <table style="margin-top: 15px">
+                <tr>
+                    <td class="label">Subtotal:</td>
+                    <td style="text-align: right" th:text="${subtotal}">S/ 55.00</td>
+                </tr>
+                <tr>
+                    <td class="label">Envío:</td>
+                    <td style="text-align: right" th:text="${deliveryFee}">S/ 5.00</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><hr></td>
+                </tr>
+                <tr class="total">
+                    <td>TOTAL:</td>
+                    <td style="text-align: right" th:text="${total}">S/ 60.00</td>
+                </tr>
+            </table>
+        </div>
+        
+        <h3>Dirección de Entrega</h3>
+        <div class="order-info">
+            <p th:text="${address}">Av. Principal 123, Lima, Perú</p>
+        </div>
+        
+        <p style="margin-top: 20px;">
+            <strong>¡Gracias por tu preferencia!</strong><br>
+            Tu pedido estará listo pronto. Te notificaremos cuando esté en camino.
+        </p>
+    </div>
+    
+    <div class="footer">
+        <p th:text="${appName}">El Pollo Empoderado</p>
+        <p>Este es un correo automático, por favor no responder.</p>
+    </div>
+</body>
+</html>
