@@ -3,7 +3,8 @@ drop database pollo_empoderado_db;
 CREATE DATABASE IF NOT EXISTS pollo_empoderado_db 
 CHARACTER SET utf8mb4 
 COLLATE utf8mb4_unicode_ci;
-
+-- ==========================================
+-- Dataloader (No subir)
 -- ==========================================
 -- INSERTAR CIUDADES
 -- ==========================================
@@ -47,6 +48,8 @@ INSERT INTO districts (nombre, ciudad_id) VALUES
 ('Ica', (SELECT ciudad_id FROM cities WHERE nombre = 'Ica')),
 ('Huacho', (SELECT ciudad_id FROM cities WHERE nombre = 'Huacho'));
 
+-- ==========================================
+-- Subir
 -- ==========================================
 -- INSERTAR USUARIOS
 -- ==========================================
