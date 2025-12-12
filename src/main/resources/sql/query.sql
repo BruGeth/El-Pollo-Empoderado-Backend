@@ -8,45 +8,45 @@ COLLATE utf8mb4_unicode_ci;
 -- ==========================================
 -- INSERTAR CIUDADES
 -- ==========================================
-INSERT INTO cities (nombre) VALUES 
-('Lima'),
-('Callao'),
-('Trujillo'),
-('Chiclayo'),
-('Piura'),
-('Ica'),
-('Huacho');
+-- INSERT INTO cities (nombre) VALUES 
+-- ('Lima'),
+-- ('Callao'),
+-- ('Trujillo'),
+-- ('Chiclayo'),
+-- ('Piura'),
+-- ('Ica'),
+-- ('Huacho');
 
 -- ==========================================
 -- INSERTAR DISTRITOS
 -- ==========================================
 -- Distritos de Lima
-INSERT INTO districts (nombre, ciudad_id) VALUES 
-('Comas', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
-('Ate', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
-('San Martín de Porres', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
-('Miraflores', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
-('Surco', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
-('Chorrillos', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
-('La Molina', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
-('Santa Anita', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
-('Independencia', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
-('San Miguel', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
-('Lurín', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
-('Cercado de Lima', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima'));
+-- INSERT INTO districts (nombre, ciudad_id) VALUES 
+-- ('Comas', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
+-- ('Ate', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
+-- ('San Martín de Porres', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
+-- ('Miraflores', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
+-- ('Surco', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
+-- ('Chorrillos', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
+-- ('La Molina', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
+-- ('Santa Anita', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
+-- ('Independencia', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
+-- ('San Miguel', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
+-- ('Lurín', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima')),
+-- ('Cercado de Lima', (SELECT ciudad_id FROM cities WHERE nombre = 'Lima'));
 
 -- Distritos de Callao
-INSERT INTO districts (nombre, ciudad_id) VALUES 
-('Callao (Saenz Peña)', (SELECT ciudad_id FROM cities WHERE nombre = 'Callao')),
-('Callao (Elmer Faucett)', (SELECT ciudad_id FROM cities WHERE nombre = 'Callao'));
+-- INSERT INTO districts (nombre, ciudad_id) VALUES 
+-- ('Callao (Saenz Peña)', (SELECT ciudad_id FROM cities WHERE nombre = 'Callao')),
+-- ('Callao (Elmer Faucett)', (SELECT ciudad_id FROM cities WHERE nombre = 'Callao'));
 
 -- Otras ciudades
-INSERT INTO districts (nombre, ciudad_id) VALUES 
-('Trujillo', (SELECT ciudad_id FROM cities WHERE nombre = 'Trujillo')),
-('Chiclayo', (SELECT ciudad_id FROM cities WHERE nombre = 'Chiclayo')),
-('Piura', (SELECT ciudad_id FROM cities WHERE nombre = 'Piura')),
-('Ica', (SELECT ciudad_id FROM cities WHERE nombre = 'Ica')),
-('Huacho', (SELECT ciudad_id FROM cities WHERE nombre = 'Huacho'));
+-- INSERT INTO districts (nombre, ciudad_id) VALUES 
+-- ('Trujillo', (SELECT ciudad_id FROM cities WHERE nombre = 'Trujillo')),
+-- ('Chiclayo', (SELECT ciudad_id FROM cities WHERE nombre = 'Chiclayo')),
+-- ('Piura', (SELECT ciudad_id FROM cities WHERE nombre = 'Piura')),
+-- ('Ica', (SELECT ciudad_id FROM cities WHERE nombre = 'Ica')),
+-- ('Huacho', (SELECT ciudad_id FROM cities WHERE nombre = 'Huacho'));
 
 -- ==========================================
 -- Subir
@@ -83,7 +83,7 @@ WHERE u.email = 'carlos.lopez@test.com' AND r.name = 'ROLE_USER';
 -- INSERTAR DIRECCIONES DE LOS USUARIOS
 -- ==========================================
 -- Nota: Ahora las direcciones están en una tabla separada
-INSERT INTO addresses (user_id, ciudad_id, distrito_id, street, number, phone, reference, label, is_default, created_at, updated_at) 
+INSERT INTO addresses (user_id, ciudad_id, distrito_id, street, number, telefono, reference_home, label, is_default, created_at, updated_at) 
 VALUES 
 -- Dirección de Juan Pérez
 ((SELECT id FROM users WHERE email = 'juan.perez@test.com'), 
